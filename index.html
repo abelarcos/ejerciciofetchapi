@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+
+    <title>Ejercicio</title>
+</head>
+
+<body>
+    <div class="container my-5 text-center">
+        <button class="btn btn-primary w-100" onclick="traer()">Obtener</button>
+        <div class="mt-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">programacion_fecha_hora</th>
+                        <th scope="col">mpeg_dash</th>
+                        <th scope="col">pple_hls</th>
+                        <th scope="col">imagenplayer</th>
+                        <th scope="col">author</th>
+                        <th scope="col">category</th>
+                        <th scope="col">arts</th>
+                        <th scope="col">language</th>
+                        <th scope="col">explicit</th>
+                        <th scope="col">copyright</th>
+                        <th scope="col">keywords</th>
+                        <th scope="col">summary</th>
+                        <th scope="col">image</th>
+                        <th scope="col">editar</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="contenido">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+   
+
+    
+<script>
+    var contenido = document.querySelector('#contenido')
+
+    function traer() {
+        fetch('api.json')
+            .then(response  => response.json())
+            .then(datos => {
+                // console.log(datos)
+                tabla(datos)
+            })
+    }
+
+    function tabla(datos) {
+        // console.log(datos)
+        contenido.innerHTML = ''
+        for(let valor of datos){
+            // console.log(valor.nombre)
+            contenido.innerHTML += `
+            
+            <tr>
+                <th scope="row">${ valor.id }</th>
+                <td>${ valor.programacion_fecha_hora}</td>
+                <td>${ valor.mpeg_dash }</td>
+                <td>${ valor.apple_hls }</td>
+                <td>${ valor.imagen_player }</td>
+                <td>${ valor.itunes_author }</td>
+                <td>${ valor.itunes_category }</td>
+                <td>${ valor.arts }</td>
+                <td>${ valor.language }</td>
+                <td>${ valor.itunes_explicit }</td>
+                <td>${ valor.copyright }</td>
+                <td>${ valor.itunes_keywords }</td>
+                <td>${ valor.itunes_summary.slice(1, 50) }</td>
+                <td>${ valor.itunes_image }</td>
+                <td><button class="btn btn-primary" type="button">Editar</button></td>
+                <td><button class="btn btn-danger" type="button">Eliminar</button></td>
+               
+            </tr>
+            
+            `
+        }
+    }
+
+
+
+    
+    
+</script>
+
+
+</body>
+
+</html>
